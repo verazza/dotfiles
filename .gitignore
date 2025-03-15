@@ -1,5 +1,13 @@
 *
+
 !.gitignore
+
 !.config/
+!.config/kitty/
 !.config/kitty/**/*
+
+!.config/starship.toml
+
+!.config/nvim/
+!.config/nvim/**/*
 
