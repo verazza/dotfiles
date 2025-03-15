@@ -5,6 +5,13 @@
 !LICENSE.txt
 !.bashrc
 
+!.global/
+!.global/**/*
+
+!.w3m/
+!.w3m/**/*
+/.w3m/cookie
+
 !.config/
 !.config/kitty/
 !.config/kitty/**/*
@@ -15,7 +22,4 @@
 !.config/nvim/**/*
 .config/nvim/lazy-lock.json
 
-!.w3m/
-!.w3m/**/*
-/.w3m/cookie
 
