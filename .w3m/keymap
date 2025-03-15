@@ -1,0 +1,1 @@
+keymap "x f" COMMAND "SET_OPTION fold_line=toggle ; RESHAPE"

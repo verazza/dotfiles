@@ -14,3 +14,6 @@
 !.config/nvim/**/*
 .config/nvim/lazy-lock.json
 
+!.w3m/
+!.w3m/**/*
+/.w3m/cookie
