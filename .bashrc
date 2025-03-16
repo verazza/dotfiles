@@ -29,7 +29,7 @@ eval "$(pyenv virtualenv-init -)"
 . "$HOME/.cargo/env"
 
 # scala
-export PATH="$PATH:/home/bella/.local/share/coursier/bin"
+export PATH="$PATH:$HOME/.local/share/coursier/bin"
 
 # sdkman
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
