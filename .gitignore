@@ -21,3 +21,7 @@
 
 !.config/nvim/
 
+!.wsl/
+!.wsl/**/*
+.wsl/.global/win32yank-x64/
+

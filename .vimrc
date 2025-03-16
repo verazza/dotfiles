@@ -1,4 +1,9 @@
-set clipboard=unnamedplus
+" wsl
+if exists('$WSL_DISTRO_NAME') && filereadable(expand('$HOME/.wsl/.vimrc'))
+    source ~/.wsl/.vimrc
+else
+    set clipboard=unnamedplus
+endif
 
 " リーダーキーをスペースに設定
 let mapleader = "\<space>"

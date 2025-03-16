@@ -39,3 +39,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # arias
 alias wl="wl-copy"
 
+# wsl
+if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
+    source $HOME/.wsl/.bashrc
+fi
+
