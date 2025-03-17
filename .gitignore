@@ -8,6 +8,7 @@
 
 !.global/
 !.global/**/*
+/.global/pkg/
 
 !.w3m/
 !.w3m/**/*
