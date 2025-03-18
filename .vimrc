@@ -1,5 +1,5 @@
 " wsl
-if exists('$WSL_DISTRO_NAME') && filereadable(expand('$HOME/.wsl/.vimrc'))
+if (exists('$WSL_DISTRO_NAME') || (has('win32') || has('win64'))) && filereadable(expand('$HOME/.wsl/.vimrc'))
     source ~/.wsl/.vimrc
 else
     set clipboard=unnamedplus
@@ -91,4 +91,3 @@ set statusline=
 
 " モード表示を無効化
 " set noshowmode
-
