@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-SOURCE_DIR="./global"
+SOURCE_DIR="./bin"
 
 DEST_DIR="/usr/local/bin"
 

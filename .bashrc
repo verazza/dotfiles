@@ -36,6 +36,9 @@ export PATH="$PATH:$HOME/.local/share/coursier/bin"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# .global/bin
+export PATH="$PATH:$HOME/.global/bin"
+
 # arias
 alias wl="wl-copy"
 
