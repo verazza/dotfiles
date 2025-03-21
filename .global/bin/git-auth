@@ -1,6 +1,6 @@
 # Git setup prompt
-read -p "Do you setup git-config? (require enter your github name & email) (y/n): " setup_github
-if [[ "$setup_github" == "y" ]]; then
+read -p "Do you setup git-config? (require enter your github name & email) (y/n): " -e setup_github
+if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
   while true; do
     read -p "Enter your github email address: " email
     if [[ "$email" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
@@ -16,13 +16,14 @@ if [[ "$setup_github" == "y" ]]; then
   git config --global user.name "$name"
 
 
-  read -p "Do you login by github auth? (require login in your browser) (y/n): " setup_login
-  if [[ "$setup_login" == "y" ]]; then
+  read -p "Do you login by github auth? (require login in your browser) (y/n): " -e setup_login
+  if [[ -z "$setup_login" || "$setup_login" == "y" ]]; then
     if ! command -v git-credential-manager &> /dev/null; then
       echo "Oh, detected you do not have git-credential-manager command."
       read -p "Do you install? (y/n): " install_gcm
       if [[ "$install_gcm" == "y" ]]; then
-        sudo pacman -Sy git-credential-manager gnome-keyring libsecret
+        yay -S git-credential-manager
+        sudo pacman -Sy gnome-keyring
       else
         echo "Installation of git-credential-manager skipped."
         return
@@ -31,8 +32,8 @@ if [[ "$setup_github" == "y" ]]; then
 
     git-credential-manager github login --no-ui
 
-    read -p "Do you update git-config credential? (y/n)" setup_credential
-    if [[ "$setup_credential" == "y" ]]; then
+    read -p "Do you update git-config credential? (y/n)" -e setup_credential
+    if [[ -z "$setup_credential" || "$setup_credential" == "y" ]]; then
       git config --global credential.helper 'manager'
       git config --global credential.credentialStore secretservice
     else
