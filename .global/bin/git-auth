@@ -1,5 +1,5 @@
 # Git setup prompt
-read -p "Do you setup github config? (require login in your browser) (y/n): " setup_github
+read -p "Do you setup git-config? (require enter your github name & email) (y/n): " setup_github
 if [[ "$setup_github" == "y" ]]; then
   while true; do
     read -p "Enter your github email address: " email
@@ -12,11 +12,11 @@ if [[ "$setup_github" == "y" ]]; then
 
   read -p "Enter your github name: " name
 
-  sudo -u "$user" git config --global user.email "$email"
-  sudo -u "$user" git config --global user.name "$name"
+  git config --global user.email "$email"
+  git config --global user.name "$name"
 
 
-  read -p "Do you login by github auth? (require git-credential-manager) (y/n): " setup_login
+  read -p "Do you login by github auth? (require login in your browser) (y/n): " setup_login
   if [[ "$setup_login" == "y" ]]; then
     if [ ! command -v git-credential-manager &> /dev/null]; then
       echo "Oh, detected you do not have git-credential-manager command."
@@ -30,11 +30,19 @@ if [[ "$setup_github" == "y" ]]; then
     fi
 
     git-credential-manager github login --no-ui
+
+    read -p "Do you update git-config credential?" setup_credential
+    if [[ "$setup_credential" == "y" ]]; then
+      git config --global credential.helper 'manager'
+      git config --global credential.credentialStore secretservice
+    else
+      echo "Update git-config credential skipped."
+    fi
   else
     echo "Github auth login skipped."
   fi
 
   echo "Git configuration completed."
 else
-    echo "Github setup skipped."
+  echo "Github setup skipped."
 fi
