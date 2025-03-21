@@ -1,0 +1,40 @@
+# Git setup prompt
+read -p "Do you setup github config? (require login in your browser) (y/n): " setup_github
+if [[ "$setup_github" == "y" ]]; then
+  while true; do
+    read -p "Enter your github email address: " email
+    if [[ "$email" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+      break
+    else
+      echo "Invalid email address. Please try again."
+    fi
+  done
+
+  read -p "Enter your github name: " name
+
+  sudo -u "$user" git config --global user.email "$email"
+  sudo -u "$user" git config --global user.name "$name"
+
+
+  read -p "Do you login by github auth? (require git-credential-manager) (y/n): " setup_login
+  if [[ "$setup_login" == "y" ]]; then
+    if [ ! command -v git-credential-manager &> /dev/null]; then
+      echo "Oh, detected you do not have git-credential-manager command."
+      read -p "Do you install? (y/n): " install_gcm
+      if [[ "$install_gcm" == "y" ]]; then
+        sudo pacman -Sy git-credential-manager gnome-keyring libsecret
+      else
+        echo "Installation of git-credential-manager skipped."
+        return
+      fi
+    fi
+
+    git-credential-manager github login --no-ui
+  else
+    echo "Github auth login skipped."
+  fi
+
+  echo "Git configuration completed."
+else
+    echo "Github setup skipped."
+fi
