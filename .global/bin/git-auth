@@ -18,7 +18,7 @@ if [[ "$setup_github" == "y" ]]; then
 
   read -p "Do you login by github auth? (require login in your browser) (y/n): " setup_login
   if [[ "$setup_login" == "y" ]]; then
-    if [ ! command -v git-credential-manager &> /dev/null]; then
+    if ! command -v git-credential-manager &> /dev/null; then
       echo "Oh, detected you do not have git-credential-manager command."
       read -p "Do you install? (y/n): " install_gcm
       if [[ "$install_gcm" == "y" ]]; then
@@ -31,7 +31,7 @@ if [[ "$setup_github" == "y" ]]; then
 
     git-credential-manager github login --no-ui
 
-    read -p "Do you update git-config credential?" setup_credential
+    read -p "Do you update git-config credential? (y/n)" setup_credential
     if [[ "$setup_credential" == "y" ]]; then
       git config --global credential.helper 'manager'
       git config --global credential.credentialStore secretservice
