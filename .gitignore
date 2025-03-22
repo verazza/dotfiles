@@ -8,11 +8,12 @@
 
 !.global/
 !.global/**/*
-/.global/pkg/
+.global/pkg/
+.global/bin/win32yank.exe
 
 !.w3m/
 !.w3m/**/*
-/.w3m/cookie
+.w3m/cookie
 
 !.config/
 !.config/kitty/
@@ -24,5 +25,4 @@
 
 !.wsl/
 !.wsl/**/*
-.wsl/.global/bin/win32yank.exe
 
