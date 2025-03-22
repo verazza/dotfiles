@@ -1,0 +1,33 @@
+#!/bin/bash
+
+read -p "Do you import repositories? (user: bella2391) (y/n): " import_repos
+if [[ "$import_repos" != "y" ]]; then
+  echo "Import skipped."
+  exit 0
+fi
+
+if ! command -v parallel &> /dev/null; then
+  read -p "Detected 'parallel' command does not exist. \nDo you install it? (y/n): " install_parallel
+  if [[ "$install_parallel" != "y" ]]; then
+    echo "Installation of 'parallel' skipped."
+    exit 1
+  fi
+
+  sudo pacman -Sy --noconfirm parallel
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to install 'parallel' command."
+    exit 1
+  fi
+fi
+
+mkdir -p ~/git/
+cd ~/git/
+parallel 'git clone https://github.com/bella2391/{}.git' ::: FMC FMCWebApp WSL-Devkit
+
+mkdir -p Learning
+cd Learning
+parallel 'git clone -b {} https://github.com/bella2391/Learning.git {}' ::: c js/ts master python rust scala
+
+echo "Finish importing."
+
+exit 0
