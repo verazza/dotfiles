@@ -1,10 +1,14 @@
 # wsl
 cd ~
 
-# if [ ! -d "/run/user/1000/" ]; then
-#   mkdir -p /run/user/1000/
-#   echo "\[$(date '+%Y-%m-%d %H:%M:%S')\] CREATED /run/user/1000/ FROM FIRST-SETUP" >> $HOME/.wsl.log
-# fi
+me=$(whoami)
+
+if [ ! -d "/run/user/1000/" ]; then
+  sudo mkdir -p /run/user/1000/
+  sudo chmod 700 /run/user/1000
+  sudo chown -R "$me":"$me" /run/user/1000
+  echo "\[$(date '+%Y-%m-%d %H:%M:%S')\] CREATED /run/user/1000/ FROM FIRST-SETUP" >> $HOME/.wsl.log
+fi
 
 if [ ! -L /run/user/1000/wayland-0 ]; then
   if [ -d /mnt/wslg/runtime-dir ]; then
