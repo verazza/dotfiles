@@ -10,6 +10,7 @@
 !.global/**/*
 .global/pkg/
 .global/bin/win32yank.exe
+.global/bin/npiperelay.exe
 
 !.w3m/
 !.w3m/**/*

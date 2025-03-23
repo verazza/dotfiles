@@ -23,3 +23,11 @@ if [ ! -f $HOME/.inputrc ]; then
   echo 'set bell-style none' > ~/.inputrc
 fi
 
+nvim () {
+    pidof socat > /dev/null 2>&1
+    if ! $? -eq 0; then
+        socat UNIX-LISTEN:/tmp/discord-ipc-0,fork \
+          EXEC:"npiperelay.exe //./pipe/discord-ipc-0"&
+    fi
+    command nvim "$@"
+}
