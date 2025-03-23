@@ -22,8 +22,8 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
       echo "Oh, detected you do not have git-credential-manager command."
       read -p "Do you install? (y/n): " install_gcm
       if [[ "$install_gcm" == "y" ]]; then
-        yay -S git-credential-manager-extras
-        sudo pacman -Sy gnome-keyring
+        yay -S --noconfirm git-credential-manager-extras
+        sudo pacman -S --noconfirm gnome-keyring
       else
         echo "Installation of git-credential-manager skipped."
         return
