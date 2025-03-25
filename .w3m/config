@@ -33,7 +33,7 @@ inline_img_protocol 4
 imgdisplay 
 image_map_list 1
 fold_line 1
-show_lnum 1
+show_lnum 0
 show_srch_str 1
 label_topline 0
 nextpage_topline 0
