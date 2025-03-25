@@ -14,14 +14,14 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
 
   git config --global user.email "$email"
   git config --global user.name "$name"
-
+  echo "Git config is updated. (target: user.email, user.name)"
 
   read -p "Do you login by github auth? (require login in your browser) (y/n): " -e setup_login
   if [[ -z "$setup_login" || "$setup_login" == "y" ]]; then
     if ! command -v git-credential-manager &> /dev/null; then
       echo "Oh, detected you do not have git-credential-manager command."
       read -p "Do you install? (y/n): " install_gcm
-      if [[ "$install_gcm" == "y" ]]; then
+      if [[ -z "$install_gcm" || "$install_gcm" == "y" ]]; then
         yay -S --noconfirm git-credential-manager-extras
         sudo pacman -S --noconfirm gnome-keyring
       else
@@ -32,10 +32,11 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
 
     git-credential-manager github login --no-ui
 
-    read -p "Do you update git-config credential? (y/n)" -e setup_credential
+    read -p "Do you update git-config credential? (y/n): " -e setup_credential
     if [[ -z "$setup_credential" || "$setup_credential" == "y" ]]; then
       git config --global credential.helper 'manager'
       git config --global credential.credentialStore secretservice
+      echo "Git config is updated. (target: credential.helpder, credential.credentialStore)"
     else
       echo "Update git-config credential skipped."
     fi
