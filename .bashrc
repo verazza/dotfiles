@@ -60,6 +60,9 @@ fi
 if command -v wl-copy &> /dev/null; then
   alias wl="wl-copy"
 fi
+if command -v nvim &> /dev/null; then
+  alias nv="nvim ./"
+fi
 
 # wsl
 if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
