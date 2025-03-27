@@ -2,7 +2,7 @@
 
 read -p "Do you import repositories? (user: bella2391, loc: ~/git) (y/n): " import_repos
 if [[ -z "$import_repos" || "$import_repos" == "y" ]]; then
-  if ! command -v parallel &> /dev/null; then
+  if ! command -v parallel &>/dev/null; then
     read -p "Detected 'parallel' command does not exist. \nDo you install it? (y/n): " install_parallel
     if [[ -z "$install_parallel" || "$install_parallel" == "y" ]]; then
       sudo pacman -Sy --noconfirm parallel

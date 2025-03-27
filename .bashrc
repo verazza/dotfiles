@@ -11,7 +11,7 @@ PS1='[\u@\h \W]\$ '
 export PS1="\$ "
 
 # starship
-if command -v starship &> /dev/null; then
+if command -v starship &>/dev/null; then
   eval "$(starship init bash)"
 fi
 
@@ -28,7 +28,7 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 if [ -d "$PYENV_ROOT/bin" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
-  if command -v pyenv &> /dev/null; then
+  if command -v pyenv &>/dev/null; then
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
@@ -57,10 +57,10 @@ if [ -d "$HOME/.global/bin" ]; then
 fi
 
 # arias
-if command -v wl-copy &> /dev/null; then
+if command -v wl-copy &>/dev/null; then
   alias wl="wl-copy"
 fi
-if command -v nvim &> /dev/null; then
+if command -v nvim &>/dev/null; then
   alias nv="nvim ./"
 fi
 
