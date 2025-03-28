@@ -33,7 +33,7 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
       fi
     fi
 
-    git-credential-manager github login --no-ui
+    # git-credential-manager github login --no-ui
 
     read -p "Do you update git-config credential? (y/n): " -e setup_credential
     if [[ -z "$setup_credential" || "$setup_credential" == "y" ]]; then
