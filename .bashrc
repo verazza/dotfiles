@@ -45,6 +45,14 @@ if [ -d "$HOME/.local/share/coursier/bin" ]; then
   export PATH="$PATH:$HOME/.local/share/coursier/bin"
 fi
 
+# go
+if command -v go &>/dev/null; then
+  GOPATH=$(go env GOPATH)
+  if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
+    export PATH="$PATH:$GOPATH/bin"
+  fi
+fi
+
 # sdkman
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
