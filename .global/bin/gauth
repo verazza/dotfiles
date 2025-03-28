@@ -16,7 +16,7 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
   git config --global user.name "$name"
   echo "Git config is updated. (target: user.email, user.name)"
 
-  read -p "Do you login by github auth? (require login in your browser) (y/n): " -e setup_login
+  read -p "Do you use secretService when authorizing by github? (require git-credential-manager-extras) (y/n): " -e setup_login
   if [[ -z "$setup_login" || "$setup_login" == "y" ]]; then
     if ! command -v git-credential-manager &> /dev/null; then
       echo "Oh, detected you do not have git-credential-manager command."
@@ -28,7 +28,7 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
           sudo pacman -S --noconfirm gnome-keyring
         fi
       else
-        echo "Installation of git-credential-manager skipped."
+        echo "Installation of git-credential-manager is skipped."
         return
       fi
     fi
@@ -41,13 +41,13 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
       git config --global credential.credentialStore secretservice
       echo "Git config is updated. (target: credential.helpder, credential.credentialStore)"
     else
-      echo "Update git-config credential skipped."
+      echo "Update git-config credential is skipped."
     fi
   else
-    echo "Github auth login skipped."
+    echo "Github auth login is skipped."
   fi
 
   echo "Git configuration completed."
 else
-  echo "Github setup skipped."
+  echo "Github setup is skipped."
 fi
