@@ -23,7 +23,14 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
       read -p "Do you install? (y/n): " install_gcm
       if [[ -z "$install_gcm" || "$install_gcm" == "y" ]]; then
         yay -S --noconfirm git-credential-manager-extras
-        sudo pacman -S --noconfirm gnome-keyring
+
+        if sudo pacman -Qs libsecret | grep -q libsecret; then
+          sudo pacman -S libsecret
+        fi
+
+        if ! command -v gnome-keyring &>/dev/null; then
+          sudo pacman -S --noconfirm gnome-keyring
+        fi
       else
         echo "Installation of git-credential-manager skipped."
         return
