@@ -68,3 +68,8 @@ fi
 if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
   source $HOME/.wsl/.bashrc
 fi
+
+# read secret .bashrc
+if [ -f $HOME/.secret/.bashrc ]; then
+  source ~/.secret/.bashrc
+fi
