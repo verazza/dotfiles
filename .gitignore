@@ -11,6 +11,7 @@
 .global/pkg/
 .global/bin/win32yank.exe
 .global/bin/npiperelay.exe
+.global/bin/gemini-terminal
 
 !.w3m/
 !.w3m/bookmark.html
