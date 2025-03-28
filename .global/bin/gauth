@@ -44,7 +44,7 @@ if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
       echo "Update git-config credential is skipped."
     fi
   else
-    echo "Github auth login is skipped."
+    echo "Using secretService is skipped."
   fi
 
   echo "Git configuration completed."
