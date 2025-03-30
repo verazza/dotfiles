@@ -10,6 +10,7 @@ let mapleader = "\<space>"
 
 imap jj <Esc>
 nnoremap <Leader>qq :qall<CR>
+nnoremap <S-w> :w<CR>
 
 set mouse=a
 
