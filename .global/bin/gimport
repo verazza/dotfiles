@@ -28,7 +28,7 @@ else
   echo "Import is skipped."
 fi
 
-read -p "Do you make symbolic link? (loc: ~/.config/nvim) (y/n): " symbolic
+read -p "Do you make symbolic link? (y/n): " symbolic
 if [[ -z "$symbolic" || "$symbolic" == "y" ]]; then
   mkdir -p ~/git/
   ln -s ~/.config/nvim ~/git/nvim
