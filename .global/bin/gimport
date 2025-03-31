@@ -17,11 +17,11 @@ if [[ -z "$import_repos" || "$import_repos" == "y" ]]; then
 
   mkdir -p ~/git/
   cd ~/git/
-  parallel 'git clone https://github.com/bella2391/{}.git' ::: FMC FMCWebApp WSL-Devkit
+  parallel 'git clone https://github.com/bella2391/{}.git' ::: fmc fmc-web devkit glyzer
 
-  mkdir -p Learning
-  cd Learning
-  parallel 'git clone -b {} https://github.com/bella2391/Learning.git {}' ::: c js/ts master python rust scala
+  mkdir -p code-lab
+  cd code-lab
+  parallel 'git clone -b {} https://github.com/bella2391/code-lab.git {}' ::: c js/ts master python rust scala
 
   echo "Finish importing."
 else
