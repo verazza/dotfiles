@@ -6,6 +6,7 @@
 !.bashrc
 !.vimrc
 !.uim
+!.tmux.conf
 
 !.global/
 !.global/**/*
