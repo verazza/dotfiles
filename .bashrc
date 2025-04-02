@@ -78,7 +78,7 @@ if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
 else
   # only cli using option
   # i use kmscon when i work on CLI environment.
-  if [ "$TERM" = "kmscon" ]; then
+  if [ "$COLORTERM" = "kmscon" ]; then
     uim-fep
   fi
 fi
