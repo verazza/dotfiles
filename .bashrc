@@ -75,6 +75,12 @@ fi
 # wsl
 if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
   source $HOME/.wsl/.bashrc
+else
+  # only cli using option
+  # i use kmscon when i work on CLI environment.
+  if [ "$TERM" = "kmscon" ]; then
+    uim-fep
+  fi
 fi
 
 # read secret .bashrc
