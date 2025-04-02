@@ -75,6 +75,8 @@ fi
 # wsl
 if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
   source $HOME/.wsl/.bashrc
+else
+  # not wsl
 fi
 
 # read secret .bashrc
