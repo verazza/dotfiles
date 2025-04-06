@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# 個別処理を行うディレクトリのリスト
+individual_dir_list=(
+  "/path/to/repo1"
+  "/path/to/repo2"
+  "~/another/repo"
+)
+
+# Git リポジトリを更新する関数
+update_git_repository() {
+  local path="$1"
+  local git_dir="$path/.git"
+
+  if [ -d "$git_dir" ]; then
+    echo ""
+    echo "--------------------------------------------------"
+    echo "Found .git directory in: \"$path\""
+    cd "$path"
+    echo "Current directory: \"$(pwd)\""
+    echo "Executing git fetch..."
+    git fetch
+    if [ $? -ne 0 ]; then
+      echo "Error occurred during git fetch."
+    else
+      echo "Executing git pull..."
+      git pull
+      if [ $? -ne 0 ]; then
+        echo "Error occurred during git pull."
+      else
+        echo "git pull completed successfully."
+      fi
+    fi
+    echo "--------------------------------------------------"
+  else
+    echo ""
+    echo "--------------------------------------------------"
+    echo "No .git directory found in: \"$path\""
+    echo "--------------------------------------------------"
+  fi
+}
+
+# シンボリックリンク先を解決する関数
+resolve_symlink() {
+  local link_path="$1"
+  readlink -f "$link_path"
+}
+
+# メイン処理
+if [ -z "$1" ]; then
+  echo "Usage: $0 [<start_directory>] [-I]"
+  exit 1
+fi
+
+individual_mode=false
+start_directory=""
+
+# 引数の解析
+while getopts "I" opt; do
+  case "$opt" in
+    I)
+      individual_mode=true
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      echo "Usage: $0 [<start_directory>] [-I]" >&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if $individual_mode; then
+  echo "Performing individual updates from list:"
+  for dir in "${individual_dir_list[@]}"; do
+    expanded_path="$dir"
+    if [[ "$expanded_path" == "~"* ]]; then
+      expanded_path="$HOME/${expanded_path:2}"
+    fi
+    update_git_repository "$expanded_path"
+  done
+else
+  start_directory="$1"
+  if [ -n "$start_directory" ]; then
+    expanded_start_directory="$start_directory"
+    if [[ "$expanded_start_directory" == "~"* ]]; then
+      expanded_start_directory="$HOME/${expanded_start_directory:2}"
+    fi
+    echo "Performing recursive update in: \"$expanded_start_directory\""
+    find "$expanded_start_directory" -type l -print0 | while IFS= read -r -d $'\0' link_path; do
+      resolved_path="$(resolve_symlink "$link_path")"
+      if [ -d "$resolved_path/.git" ]; then
+        update_git_repository "$resolved_path"
+      fi
+    done
+    find "$expanded_start_directory" -type d -name ".git" -print0 | while IFS= read -r -d $'\0' git_dir; do
+      parent_dir="$(dirname "$git_dir")"
+      update_git_repository "$parent_dir"
+    done
+  fi
+fi
+
+echo ""
+echo "Processing completed."

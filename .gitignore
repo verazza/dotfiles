@@ -13,6 +13,7 @@
 .global/pkg/
 .global/bin/win32yank.exe
 .global/bin/npiperelay.exe
+.global/bin/rufus-4.6.exe
 .global/bin/gemini-terminal
 
 !.w3m/
