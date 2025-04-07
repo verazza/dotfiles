@@ -2,9 +2,9 @@
 
 # 個別処理を行うディレクトリのリスト
 individual_dir_list=(
-  "/path/to/repo1"
-  "/path/to/repo2"
-  "~/another/repo"
+  #"/path/to/repo1"
+  #"/path/to/repo2"
+  "~"
 )
 
 # Git リポジトリを更新する関数
@@ -58,17 +58,17 @@ start_directory=""
 # 引数の解析
 while getopts "I" opt; do
   case "$opt" in
-    I)
-      individual_mode=true
-      ;;
-    \?)
-      echo "Invalid option: -$OPTARG" >&2
-      echo "Usage: $0 [<start_directory>] [-I]" >&2
-      exit 1
-      ;;
+  I)
+    individual_mode=true
+    ;;
+  \?)
+    echo "Invalid option: -$OPTARG" >&2
+    echo "Usage: $0 [<start_directory>] [-I]" >&2
+    exit 1
+    ;;
   esac
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 if $individual_mode; then
   echo "Performing individual updates from list:"
