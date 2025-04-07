@@ -1,5 +1,5 @@
 # dotfiles
 
 ## License
-[MIT](LICENSE.txt)
+[MIT](LICENSE)
 
