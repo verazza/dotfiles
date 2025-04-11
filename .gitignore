@@ -33,3 +33,6 @@
 !.wsl/
 !.wsl/**/*
 
+!.work/
+!.work/**/*
+.work/logo/misaki_gothic_2nd.ttf

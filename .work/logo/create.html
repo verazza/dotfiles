@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo - logo creation</title>
+  <style>
+    @font-face {
+      font-family: 'MisakiGothic';
+      src: url('./misaki_gothic_2nd.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      font-family: 'MisakiGothic', monospace;
+      font-size: 100px;
+      line-height: 1.5;
+      color: lightgreen;
+      background-color: lightslategray !important;
+    }
+    .center {
+      text-align: center;
+    }
+    .stretched-t1 {
+      transform: scaleX(1.5);
+      display: inline-block;
+    }
+    .stretched-t2 {
+      transform: scaleX(1.75);
+      display: inline-block;
+    }
+    .stretched-t3 {
+      transform: scaleX(2.0);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <p>K</p>
+    <br><br>
+    <p><span class="stretched-t1">K</span></p>
+    <br><br>
+    <p><span class="stretched-t2">K</span></p>
+    <br><br>
+    <p><span class="stretched-t3">K</span></p>
+  </div>
+</body>
+</html>
