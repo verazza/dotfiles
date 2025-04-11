@@ -1,0 +1,1 @@
+0-59 * * * * source /home/bella/.env && wget -O DDNSNow_update.log "https://f5.si/update.php?domain=${DDNS_DOMAIN}&password=${DDNS_API_KEY}"
