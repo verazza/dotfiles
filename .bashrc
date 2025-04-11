@@ -87,3 +87,5 @@ fi
 if [ -f $HOME/.secret/.bashrc ]; then
   source ~/.secret/.bashrc
 fi
+
+export EDITOR=nvim
