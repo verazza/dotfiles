@@ -1,0 +1,49 @@
+#!/bin/bash
+
+. define
+
+exclude_common="libraries/* cache/* logs/* crash-reports/* bundler/* *~"
+
+declare -A MAP=(
+  ["dev forge"]="server.properties"
+  ["dev test"]=""
+  ["home"]=""
+  ["minigame darumasan"]=""
+  ["minigame relics"]=""
+  ["mod twillest"]=""
+  ["mod universe"]=""
+  ["survival latest"]=""
+  ["velocity"]="lang/*"
+)
+
+TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
+BACKUP_DIR_WITH_TIMESTAMP="${BACKUP_ZIP_DIR}/${TIMESTAMP}"
+
+mkdir -p "${BACKUP_DIR_WITH_TIMESTAMP}"
+
+for ENTRY in "${!MAP[@]}"; do
+  EXCLUDE=${MAP[$ENTRY]}
+  BEFORE_IFS=' ' read -r -a before_parts <<<"${ENTRY}"
+  TARGET_IN_DIR="${before_parts[0]}"
+  TARGET="${before_parts[1]}"
+
+  if [ -z "$TARGET" ]; then
+    PATH_TO_TARGET="${TARGET_IN_DIR}"
+    SAVED_ZIP_NAME="${TARGET_IN_DIR}"
+  else
+    PATH_TO_TARGET="${TARGET_IN_DIR}/${TARGET}"
+    SAVED_ZIP_NAME="${TARGET_IN_DIR}_${TARGET}"
+  fi
+
+  entry="${EXCLUDE} ${exclude_common}"
+  IFS=' ' read -r -a parts <<<"$entry"
+
+  exclude_patterns=("${parts[@]:0}")
+  exclude_args=()
+  for pattern in "${exclude_patterns[@]}"; do
+    exclude_args+=("-x" "${SERVER_DIR}/${PATH_TO_TARGET}/${pattern}")
+  done
+  zip -r "${BACKUP_DIR_WITH_TIMESTAMP}/${SAVED_ZIP_NAME}.zip" "${SERVER_DIR}/${PATH_TO_TARGET}" "${exclude_args[@]}"
+done
+
+echo "Backup zips created in: ${BACKUP_DIR_WITH_TIMESTAMP}"

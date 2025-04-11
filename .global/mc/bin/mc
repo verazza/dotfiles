@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. define
+
+sudo find "${SERVER_DIR}" -type d -exec chmod g+s {} \;
+sudo chmod -R 770 "${SERVER_DIR}"
+
+sudo chown -R mc:mc "${SERVER_DIR}"
+
+sudo setfacl -R -m u:${CO_MCUSER}:rwx "${SERVER_DIR}"
+# sudo setfacl -R -m u:${CO_MCUSER}:rwx "${BASH_DIR}"
+sudo setfacl -R -m u:${CO_MCUSER}:rwx "${BACKUP_DIR}"
+
+sudo setfacl -dR -m u:${MCUSER}:rwx "${SERVER_DIR}"
+sudo setfacl -dR -m g:${MCUSER}:rwx "${SERVER_DIR}"

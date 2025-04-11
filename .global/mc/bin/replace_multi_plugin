@@ -1,0 +1,57 @@
+#!/bin/bash
+
+. define
+
+TARGET_DIR="${SERVER_DIR}"
+NEW_PLUGIN_DIR="${NEW_PLUGIN_DIR}"
+
+declare -A JAR_FILES=(
+  # spigot
+  # ["grimac-2.3.70.jar"]=""
+
+  # ["AuxProtect-1.3.3.jar"]=""
+  ["GSit-2.2.0.jar"]=""
+  ["LuckPerms-Bukkit-5.4.156.jar"]=""
+  ["Bolt-1.1.52.jar"]=""
+  # ["worldedit-bukkit-7.3.10.jar"]=""
+
+  # ["ChestSort-14.2.0.jar"]=""
+  # ["GravesX-4.9.7.3.jar"]=""
+  # ["multiverse-core-4.3.14.jar"]=""
+  # ["multiverse-inventories-4.2.6.jar"]=""
+  # ["multiverse-netherportals-4.2.3.jar"]=""
+  # ["multiverse-portals-4.2.3.jar"]=""
+  # ["PlaceholderAPI-2.11.6.jar"]=""
+  # ["UltimateInventory-1.5.jar"]=""
+  # ["ebackup-1.3.1.jar"]=""
+
+  # velocity
+  # 要確認: Geyser, FloodGate
+  ["LuckPerms-Velocity-5.4.156.jar"]=""
+  ["spark-1.10.126-velocity.jar"]=""
+
+  # ["UltimateAntibot-velocity-4.1.2-ABYSS.jar"]=""
+  # ["minimotd-velocity-2.1.5.jar"]=""
+  # ["ViaVersion-5.2.1.jar"]=""
+  # ["ViaRewind-4.0.5.jar"]=""
+  # ["ViaBackwards-5.2.1.jar"]=""
+  ["Velocittab-1.7.4.jar"]=""
+)
+
+find "$TARGET_DIR" -type d -name "plugins" | while read PLUGINS_DIR; do
+  for JAR_FILE_NAME in "${!JAR_FILES[@]}"; do
+    NEW_JAR_FILE="${NEW_PLUGIN_DIR}/${JAR_FILES[$JAR_FILE_NAME]}"
+
+    if [ -z "$JAR_FILE_NAME" ] || [ -z "$NEW_JAR_FILE" ]; then
+      continue
+    fi
+
+    if [ -f "$PLUGINS_DIR/$JAR_FILE_NAME" ]; then
+      rm "$PLUGINS_DIR/$JAR_FILE_NAME"
+      echo "Removed $PLUGINS_DIR/$JAR_FILE_NAME"
+
+      cp "$NEW_JAR_FILE" "$PLUGINS_DIR"
+      echo "Copied $NEW_JAR_FILE to $PLUGINS_DIR"
+    fi
+  done
+done

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. define
+
+TARGET_DIR="${SERVER_DIR}"
+
+SEARCH_STRING="$1"
+
+if [ -z "$SEARCH_STRING" ]; then
+  echo "Error: Please specify the search string."
+  echo "Usage: $0 <search_string>"
+  exit 1
+fi
+
+# *LuckPerms*,*ViaVersion*,*ChestSort*,*Placeholder*,*tabtps-spigot*,*Bolt*,*worldedit*,*grimac*
+find "$TARGET_DIR" -type d -name "plugins" | while read PLUGINS_DIR; do
+  find "$PLUGINS_DIR" -type f -name "*.jar" -not -path "*/.paper-remapped/*" | while read JAR_FILE; do
+    if [[ "$(basename "$JAR_FILE")" == *"$SEARCH_STRING"* ]]; then
+      echo "Found: $JAR_FILE"
+    fi
+  done
+done

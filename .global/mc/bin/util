@@ -1,0 +1,57 @@
+#!/bin/bash
+
+check_given() {
+  if [ -z "$1" ]; then
+    echo "error: args does not be given."
+    exit 1
+  fi
+}
+
+is_jar() {
+  if [ "$#" -eq 1 ]; then
+    local jar_files=($1/*.jar)
+  else
+    local jar_files=(*.jar)
+  fi
+
+  if [ ${#jar_files[@]} -eq 0 ]; then
+    echo "error: jar file not found."
+    exit 1
+  elif [ ${#jar_files[@]} -gt 1 ]; then
+    echo "error: multiple jar files found."
+    exit 1
+  fi
+
+  JAR_FILE="${jar_files[0]}" # global
+  if [ "${JAR_FILE}" = "*.jar" ]; then
+    echo "error(2): jar file not found."
+    exit 1
+  fi
+
+  echo "Jar file found: ${JAR_FILE}"
+}
+
+is_file() {
+  if [ "$#" -lt 1 ]; then
+    echo "error: args does not be given."
+    echo "usage: $0 \${script_file_name}"
+    echo "usage: $0 \${script_file_name} \${path}"
+    exit 1
+  fi
+  if [ "$#" -eq 1 ]; then
+    if [ -f "$1" ]; then
+      echo "file: $1 found."
+    else
+      echo "file: $1 not found."
+      exit 1
+    fi
+  fi
+  if [ "$#" -eq 2 ]; then
+    if [ -f "$2/$1" ]; then
+      echo "file: $1 found at $2"
+    else
+      echo "file: $1 not found at $2"
+      exit 1
+    fi
+  fi
+}

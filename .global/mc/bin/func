@@ -1,0 +1,88 @@
+#!/bin/bash
+
+. define
+. util
+
+connect() {
+  check_given "$1"
+  local script_dir="$1"
+  local script_name=$(basename "$script_dir")
+
+  local CURRENT_USER=$(whoami)
+
+  if [ "$CURRENT_USER" != "$MCUSER" ]; then
+    if sudo su - "$MCUSER" -c "/usr/bin/screen -list | grep -q '\.${script_name}'"; then
+      echo "connecting found screen session: ${script_name}..."
+      sudo su - "$MCUSER" -c "/usr/bin/screen -r '${script_name}'"
+    else
+      echo "screen session not found: ${script_name}."
+    fi
+  else
+    if /usr/bin/screen -list | grep -q "\.$script_name"; then
+      echo "connecting found screen session: ${script_name}..."
+      /usr/bin/screen -r "$script_name"
+    else
+      echo "screen session not found: ${script_name}."
+    fi
+  fi
+}
+
+create() {
+  local script_dir="$1"
+  check_given "${script_dir}"
+
+  local script_name=$(basename "$script_dir")
+  local file_name="u.sh"
+
+  is_file "${file_name}" "${script_dir}"
+
+  local CURRENT_USER=$(whoami)
+
+  if [ "$CURRENT_USER" != "$MCUSER" ]; then
+    if sudo su - "$MCUSER" -c "/usr/bin/screen -list | grep -q '\.${script_name}'"; then
+      echo "connecting found screen session: ${script_name}..."
+      sudo su - "$MCUSER" -c "/usr/bin/screen -r $script_name"
+    else
+      echo "creating new screen session: ${script_name}..."
+      sudo su - "$MCUSER" -c "/usr/bin/screen -dmS '$script_name' bash -c 'cd $script_dir && ./${file_name}'"
+      sleep 1
+      sudo su - "$MCUSER" -c "/usr/bin/screen -r $script_name"
+    fi
+  else
+    if /usr/bin/screen -list | grep -q "\.$script_name"; then
+      echo "connecting found screen session: ${script_name}..."
+      /usr/bin/screen -r "$script_name"
+    else
+      echo "creating new screen session: ${script_name}..."
+      /usr/bin/screen -dmS "$script_name" bash -c "cd $script_dir && ./${file_name}"
+      sleep 1
+      /usr/bin/screen -r "$script_name"
+    fi
+  fi
+}
+
+over_mc_cmd() {
+  check_given "$1"
+  local cmd=$1
+
+  local CURRENT_USER=$(whoami)
+
+  if [ "$CURRENT_USER" != "$MCUSER" ]; then
+    sudo su - "$MCUSER" -c "$cmd"
+  else
+    eval "$cmd"
+  fi
+}
+
+quit() {
+  local script_dir="$1"
+  check_given "${script_dir}"
+
+  local script_name=$(basename "$script_dir")
+
+  if /usr/bin/screen -list | grep -q "\.$script_name"; then
+    sleep 1
+    /usr/bin/screen -S "$script_name" -X quit
+    echo "Quit from ${script_name}'s screen successfully."
+  fi
+}

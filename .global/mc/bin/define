@@ -1,0 +1,17 @@
+#!/bin/bash
+
+JAVA23="/usr/lib/jvm/jdk-23-openjdk/bin/java"
+JAVA22="/usr/lib/jvm/jdk-22.0.2-oracle-x64/bin/java"
+JAVA21="/usr/lib/jvm/java-21-openjdk/bin/java"
+JAVA17="/usr/lib/jvm/java-17-openjdk/bin/java"
+
+MCUSER="mc"
+CO_MCUSER="bella"
+ORG="Kishax"
+BACKUP_DIR="/mc/backup"
+BACKUP_JAR_DIR="${BACKUP_DIR}/jar.build"
+BACKUP_ZIP_DIR="${BACKUP_DIR}/zips"
+GIT_SOURCE_PROJECT_DIR="/home/bella/git/kishax"
+SERVER_DIR="/mc/server"
+# BASH_DIR="/mc/.bash"
+NEW_PLUGIN_DIR="~/Downloads"
