@@ -11,7 +11,7 @@ PROJECT_PATH="${DEPLOY_PATH}/${PROJECT_NAME}"
 sudo systemctl stop ${SERVICE_NAME}
 
 if [ -d "${PROJECT_PATH}" ]; then
-  rm -rf $PYENV_ROOT/bin
+  rm -rf "${PROJECT_PATH}"
 fi
 
 cp -pr "${SOURCE_PATH}" "${DEPLOY_PATH}/"

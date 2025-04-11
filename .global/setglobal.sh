@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-SOURCE_DIRS=("./bin" "./mc/bin") # Array for source directories
+SOURCE_DIRS=("./bin" "./mc/bin" "./web/bin") # Array for source directories
 DEST_DIR="/usr/local/bin"
 EXCLUDE_EXTENSIONS=".ps1" # Default exclude extensions
 
