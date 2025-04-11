@@ -13,6 +13,7 @@ declare -A SOURCE_DEST_MAP=(
   ["fabric"]="fabric/fav1_20_4/build/libs/${ORG}-Fabric-1.20.4-remapped.jar:${BACKUP_JAR_DIR}/fabric/1.20.4:${SERVER_DIR}/mod/universe/mods/"
   ["forge"]="forge/fov1_21_1/build/libs/${ORG}-Forge-1.21.1-reobfed.jar:${BACKUP_JAR_DIR}/forge/1.21.1:${SERVER_DIR}/dev/forge/mods/"
   ["neoforge"]="neoforge/neofov1_21_1/build/libs/${ORG}-NeoForge-1.21.1.jar:${BACKUP_JAR_DIR}/neoforge/1.21.1:${SERVER_DIR}/mod/twillest/mods/"
+  ["dev"]="spigot/sv1_21_4/build/libs/${ORG}-Spigot-1.21.4.jar:${BACKUP_JAR_DIR}/spigot/1.21.4:${SERVER_DIR}/dev/test/plugins/"
 )
 
 process_copy() {
@@ -80,6 +81,7 @@ process_copy() {
 
 if [ $# -eq 0 ]; then
   echo "No arguments provided. Executing for all defined targets:"
+  echo "- all # for all under"
   for target in "${!SOURCE_DEST_MAP[@]}"; do
     echo "- $target"
     # process_copy "$target"
