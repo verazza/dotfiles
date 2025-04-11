@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Git setup prompt
 read -p "Do you setup git-config? (require enter your github name & email) (y/n): " -e setup_github
 if [[ -z "$setup_github" || "$setup_github" == "y" ]]; then
