@@ -16,7 +16,7 @@ declare -A MAP=(
   ["velocity"]="lang/*"
 )
 
-TIMESTAMP=$(date +%Y-%m-%d %H-%M-%S)
+TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
 BACKUP_DIR_WITH_TIMESTAMP="${BACKUP_ZIP_DIR}/${TIMESTAMP}"
 
 mkdir -p "${BACKUP_DIR_WITH_TIMESTAMP}"
