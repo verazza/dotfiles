@@ -10,24 +10,38 @@ EXCLUDE_EXTENSIONS=".ps1" # Default exclude extensions
 # Function to display options with numbers
 display_options() {
   local -n arr="$1" # Declare a local name reference to the first argument (the array)
+  echo "[all] All of the above"
   for i in "${!arr[@]}"; do
     echo "[$((i + 1))] ${arr[$i]}"
   done
 }
 
 # Ask the user to select source directories
-echo "Select the directories to make global (enter numbers separated by spaces):"
+echo "Select the directories to make global (enter numbers separated by spaces, or 'all' for all):"
 display_options SOURCE_DIRS
-read -ra selected_indices
+read -ra selected_options
 
 selected_source_dirs=()
-for index in "${selected_indices[@]}"; do
-  if [[ "$index" -ge 1 && "$index" -le "${#SOURCE_DIRS[@]}" ]]; then
-    selected_source_dirs+=("${SOURCE_DIRS[$((index - 1))]}")
-  else
-    echo "Invalid selection: $index. Skipping."
+select_all=false
+
+for option in "${selected_options[@]}"; do
+  if [[ "$option" == "all" ]]; then
+    select_all=true
+    break
   fi
 done
+
+if "$select_all"; then
+  selected_source_dirs=("${SOURCE_DIRS[@]}")
+else
+  for option in "${selected_options[@]}"; do
+    if [[ "$option" -ge 1 && "$option" -le "${#SOURCE_DIRS[@]}" ]]; then
+      selected_source_dirs+=("${SOURCE_DIRS[$((option - 1))]}")
+    else
+      echo "Invalid selection: $option. Skipping."
+    fi
+  done
+fi
 
 if [[ -z "${selected_source_dirs[@]}" ]]; then
   echo "No directories selected. Exiting."
