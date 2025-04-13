@@ -2,7 +2,8 @@
 
 cd "$(dirname "$0")"
 
-SOURCE_DIRS=("./bin" "./mc/bin" "./web/bin") # Array for source directories
+GLOBAL_PATH="$HOME/.global"
+SOURCE_DIRS=("${GLOBAL_PATH}/bin" "${GLOBAL_PATH}/mc/bin" "${GLOBAL_PATH}/web/bin") # Array for source directories
 DEST_DIR="/usr/local/bin"
 EXCLUDE_EXTENSIONS=".ps1" # Default exclude extensions
 
