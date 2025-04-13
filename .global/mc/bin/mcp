@@ -6,7 +6,7 @@ MOVE_OLD_FILES=true
 TODAY=$(date +%Y%m%d)
 
 declare -A SOURCE_DEST_MAP=(
-  ["spigot"]="spigot/sv1_21_4/build/libs/${ORG}-Spigot-1.21.4.jar:${BACKUP_JAR_DIR}/spigot/1.21.4:${SERVER_DIR}/survival/latest/plugins/,${SERVER_DIR}/home/plugins/,${SERVER_DIR}/dev/test/plugins/"
+  ["spigot"]="spigot/sv1_21_5/build/libs/${ORG}-Spigot-1.21.5.jar:${BACKUP_JAR_DIR}/spigot/1.21.5:${SERVER_DIR}/survival/latest/plugins/,${SERVER_DIR}/home/plugins/,${SERVER_DIR}/dev/test/plugins/"
   ["spigot2"]="spigot/sv1_21_3/build/libs/${ORG}-Spigot-1.21.3.jar:${BACKUP_JAR_DIR}/spigot/1.21.3:${SERVER_DIR}/minigame/darumasan/plugins/"
   ["spigot3"]="spigot/sv1_20_2/build/libs/${ORG}-Spigot-1.20.2.jar:${BACKUP_JAR_DIR}/spigot/1.20.2:${SERVER_DIR}/minigame/relics/plugins/"
   ["velocity"]="velocity/build/libs/${ORG}-Velocity-3.4.0.jar:${BACKUP_JAR_DIR}/velocity/3.4.0:${SERVER_DIR}/velocity/plugins/"
@@ -46,6 +46,7 @@ process_copy() {
 
   if [ "$MOVE_OLD_FILES" = true ]; then
     local jar_files
+    mkdir -p "${backup_dir}"
     jar_files=($(find "${backup_dir}" -maxdepth 1 -name "*.jar"))
     if [ ${#jar_files[@]} -eq 1 ]; then
       jar_file_name="${jar_files[0]}"
