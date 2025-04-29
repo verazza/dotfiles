@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $# -gt 0 ]]; then
+  for arg in "$@"; do
+    expanded_path=$(eval echo "$arg")
+    if [[ -d "$expanded_path" ]]; then
+      all_items=$(ls -p -U1 "$expanded_path")
+      file_count=$(echo "$all_items" | grep -v / | wc -l)
+      dir_count=$(echo "$all_items" | grep "/" | wc -l)
+      echo "${file_count}f:${dir_count}d:$expanded_path"
+    else
+      echo "Error: '$arg' is not valid path." >&2
+    fi
+  done
+else
+  all_items=$(ls -p -U1)
+  file_count=$(echo "$all_items" | grep -v / | wc -l)
+  dir_count=$(echo "$all_items" | grep "/" | wc -l)
+  echo "${file_count}f:${dir_count}d:$(pwd)"
+fi
