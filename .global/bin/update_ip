@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if [[ $# -le 2 ]]; then
+  echo -e "Error: args not given.\nArg0 needs API_TOKEN.\nArg1 needs ZONE_ID.\nArg2 needs RECORD_ID."
+  exit
+fi
+
+API_TOKEN="$1"
+ZONE_ID="$2"
+RECORD_ID="$3"
+
+LOG_PATH="/home/bella/cloudflare_ddns_update.log"
+
+CURRENT_IP=$(curl -s ifconfig.me)
+
+if ! command -v jq &>/dev/null; then
+  sudo pacman -S --noconfirm jq
+fi
+
+CURRENT_CLOUDFLARE_IP=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?type=A&name=kishax.f5.si" \
+  -H "Authorization: Bearer ${API_TOKEN}" \
+  -H "Content-Type: application/json" | jq -r '.result[0].content')
+
+# for check response
+# CURRENT_CLOUDFLARE_RESPONSE=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${RECORD_ID}" \
+#   -H "Authorization: Bearer ${API_TOKEN}" \
+#   -H "Content-Type: application/json")
+
+if [ "$CURRENT_IP" != "$CURRENT_CLOUDFLARE_IP" ]; then
+  DATA='{"content":"'${CURRENT_IP}'"}'
+  curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${RECORD_ID}" \
+    -H "Authorization: Bearer ${API_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d "$DATA" >"$LOG_PATH" 2>&1
+  echo "$(date) - IPアドレスを ${CURRENT_IP} に更新しました" >>"$LOG_PATH"
+else
+  echo "$(date) - IPアドレスは変更されていません" >>"$LOG_PATH"
+fi
