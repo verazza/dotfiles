@@ -1,1 +1,1 @@
-*/5 * * * * source /home/bella/.env && /home/bella/.global/bin/update_ip "${CF_API_TOKEN}" "${CF_ZONE_ID}" "${RECORD_ID}"
+*/5 * * * * source /home/bella/.env && /home/bella/.global/bin/update_ip "${CF_HOST}" "${CF_API_TOKEN}" "${CF_ZONE_ID}" "${RECORD_ID}"
