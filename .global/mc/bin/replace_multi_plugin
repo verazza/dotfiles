@@ -35,10 +35,10 @@ declare -A JAR_FILES=(
   # ["spark-1.10.129-velocity.jar"]="" # 1
 
   # ["UltimateAntibot-velocity-4.1.2-ABYSS.jar"]=""
-  # ["minimotd-velocity-2.1.5.jar"]=""
-  ["ViaVersion-5.3.1.jar"]="ViaVersion-5.3.2.jar"
+  # ["minimotd-velocity-2.1.5.jar"]="minimotd-velocity-2.1.6.jar"
+  # ["ViaVersion-5.3.1.jar"]="ViaVersion-5.3.2.jar"
   # ["ViaRewind-4.0.7.jar"]="" # 1
-  ["ViaBackwards-5.3.1.jar"]="ViaBackwards-5.3.2.jar"
+  # ["ViaBackwards-5.3.1.jar"]="ViaBackwards-5.3.2.jar"
   # ["Velocittab-1.7.5.jar"]="" # 1
 )
 
