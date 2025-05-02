@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $# -le 2 ]]; then
+if [[ $# -le 3 ]]; then
   echo -e "Error: args not given.\nArg0 needs API_TOKEN.\nArg1 needs ZONE_ID.\nArg2 needs RECORD_ID."
   exit
 fi
@@ -10,7 +10,7 @@ API_TOKEN="$2"
 ZONE_ID="$3"
 RECORD_ID="$4"
 
-LOG_PATH="/home/bella/cloudflare_ddns_update.log"
+LOG_PATH="$HOME/cloudflare_ddns_update.log"
 
 CURRENT_IP=$(curl -s ifconfig.me)
 
@@ -22,10 +22,10 @@ CURRENT_CLOUDFLARE_IP=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zon
   -H "Authorization: Bearer ${API_TOKEN}" \
   -H "Content-Type: application/json" | jq -r '.result[0].content')
 
-# for check response
-# CURRENT_CLOUDFLARE_RESPONSE=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${RECORD_ID}" \
+# check
+# curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?type=A&name=mc.kishax.net" \
 #   -H "Authorization: Bearer ${API_TOKEN}" \
-#   -H "Content-Type: application/json")
+#   -H "Content-Type: application/json" | jq .
 
 if [ "$CURRENT_IP" != "$CURRENT_CLOUDFLARE_IP" ]; then
   DATA='{"content":"'${CURRENT_IP}'"}'

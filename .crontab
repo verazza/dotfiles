@@ -1,1 +1,2 @@
 */5 * * * * source /home/bella/.env && /home/bella/.global/bin/update_ip "${CF_HOST}" "${CF_API_TOKEN}" "${CF_ZONE_ID}" "${RECORD_ID}"
+0-59 * * * * source /home/bella/.env && wget -O DDNSNow_update.log "https://f5.si/update.php?domain=${DDNS_DOMAIN}&password=${DDNS_API_KEY}"
