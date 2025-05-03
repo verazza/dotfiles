@@ -1,0 +1,61 @@
+#!/bin/bash
+
+. $HOME/.env
+
+MYSQL_USER="${MYSQL_USER}"
+
+MYSQL_PASSWORD="${MYSQL_PASSWORD}"
+
+MYSQLDUMP_PATH=$(which mariadb-dump)
+
+MYSQL_PATH=$(which mariadb)
+
+PARENT_BACKUP_DIR="$HOME/.sql"
+
+SCRIPT_NAME=$(basename "$0")
+
+TIMESTAMP=$(date "+%Y-%m-%d_%H-%M-%S")
+
+print_usage() {
+  echo "使用法: $SCRIPT_NAME <データベース名1> [データベース名2 ...]"
+  echo "環境変数: MYSQL_USER (MySQLユーザー名), MYSQL_PASSWORD (MySQLパスワード) を設定してください。"
+  exit 1
+}
+
+if [ $# -eq 0 ]; then
+  echo "エラー: バックアップするデータベース名を指定してください。"
+  print_usage
+fi
+
+for DATABASE_NAME in "$@"; do
+  BACKUP_DIR="${PARENT_BACKUP_DIR}/${TIMESTAMP}/${DATABASE_NAME}"
+  mkdir -p "${BACKUP_DIR}"
+
+  echo "データベース '${DATABASE_NAME}' のバックアップを開始します..."
+
+  TABLES=$("${MYSQL_PATH}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -D"${DATABASE_NAME}" -N -e "SHOW TABLES")
+
+  if [ $? -ne 0 ]; then
+    echo "エラー: データベース '${DATABASE_NAME}' のテーブル一覧の取得に失敗しました。"
+    continue
+  fi
+
+  for TABLE_NAME in ${TABLES}; do
+    BACKUP_FILE="${BACKUP_DIR}/${TABLE_NAME}.sql"
+
+    echo "テーブル '${DATABASE_NAME}.${TABLE_NAME}' をエクスポート中..."
+    "${MYSQLDUMP_PATH}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${DATABASE_NAME}" "${TABLE_NAME}" >"${BACKUP_FILE}"
+
+    if [ $? -eq 0 ]; then
+      echo "テーブル '${DATABASE_NAME}.${TABLE_NAME}' のエクスポートが完了しました: ${BACKUP_FILE}"
+    else
+      echo "エラー: テーブル '${DATABASE_NAME}.${TABLE_NAME}' のエクスポートに失敗しました。"
+    fi
+  done
+
+  echo "データベース '${DATABASE_NAME}' 内のすべてのテーブルのエクスポートが完了しました。"
+done
+
+echo "指定されたすべてのデータベースのバックアップが完了しました。"
+
+exit 0
