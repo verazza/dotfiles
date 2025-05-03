@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. $HOME/.env
+
+DDNS_DOMAIN="${DDNS_DOMAIN}"
+DDNS_API_KEY="${DDNS_API_KEY}"
+
+mkdir -p $HOME/.log/
+
+wget -O "$HOME/.log/DDNSNow_update.log" "https://f5.si/update.php?domain=${DDNS_DOMAIN}&password=${DDNS_API_KEY}"
