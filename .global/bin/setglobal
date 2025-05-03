@@ -10,14 +10,14 @@ EXCLUDE_EXTENSIONS=".ps1" # Default exclude extensions
 # Function to display options with numbers
 display_options() {
   local -n arr="$1" # Declare a local name reference to the first argument (the array)
-  echo "[all] All of the above"
+  echo "[0] All of the above"
   for i in "${!arr[@]}"; do
     echo "[$((i + 1))] ${arr[$i]}"
   done
 }
 
 # Ask the user to select source directories
-echo "Select the directories to make global (enter numbers separated by spaces, or 'all' for all):"
+echo "Select the directories to make global (enter numbers separated by spaces, or '0' for all):"
 display_options SOURCE_DIRS
 read -ra selected_options
 
@@ -25,7 +25,7 @@ selected_source_dirs=()
 select_all=false
 
 for option in "${selected_options[@]}"; do
-  if [[ "$option" == "all" ]]; then
+  if [[ "$option" == "0" ]]; then
     select_all=true
     break
   fi
