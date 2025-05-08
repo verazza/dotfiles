@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PROJECT_NAME="kishax-web"
-SERVICE_NAME="kishaxweb"
+SERVICE_NAME="${PROJECT_NAME}"
 DEV_USER="bella"
 WEB_USER="nodeuser"
 SOURCE_PATH="/home/${DEV_USER}/git/${PROJECT_NAME}"
