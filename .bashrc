@@ -64,6 +64,11 @@ if [ -d "$HOME/.global/bin" ]; then
   export PATH="$PATH:$HOME/.global/bin"
 fi
 
+# php-composer
+if [ -d "$HOME/.config/composer/vendor/bin" ]; then
+  export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+fi
+
 # arias
 if command -v wl-copy &>/dev/null; then
   alias wl="wl-copy"
