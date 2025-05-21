@@ -66,6 +66,7 @@ fi
 
 # php-composer
 if [ -d "$HOME/.config/composer/vendor/bin" ]; then
+  export PHP_CS_FIXER_IGNORE_ENV=1
   export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 fi
 
