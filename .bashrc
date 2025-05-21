@@ -77,6 +77,9 @@ fi
 if command -v nvim &>/dev/null; then
   alias nv="nvim ./"
 fi
+if command -v lazygit &>/dev/null; then
+  alias lg="lazygit"
+fi
 
 # wsl
 if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
