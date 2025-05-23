@@ -1,6 +1,6 @@
 " wsl
-if (exists('$WSL_DISTRO_NAME') || (has('win32') || has('win64'))) && filereadable(expand('$HOME/.wsl/.vimrc'))
-  source ~/.wsl/.vimrc
+if (exists('$WSL_DISTRO_NAME') || (has('win32') || has('win64'))) && filereadable(expand('$HOME/.win/wsl/.vimrc'))
+  source ~/.win/wsl/.vimrc
 else
   set clipboard=unnamedplus
 endif

@@ -30,8 +30,8 @@
 
 !.config/nvim/
 
-!.wsl/
-!.wsl/**/*
+!.win/
+!.win/**/*
 
 !.work/
 !.work/**/*

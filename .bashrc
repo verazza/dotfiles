@@ -82,8 +82,8 @@ if command -v lazygit &>/dev/null; then
 fi
 
 # wsl
-if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.wsl/.bashrc ]; then
-  source $HOME/.wsl/.bashrc
+if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.win/wsl/.bashrc ]; then
+  source $HOME/.win/wsl/.bashrc
 else
   # only cli using option
   # i use kmscon when i work on CLI environment.
