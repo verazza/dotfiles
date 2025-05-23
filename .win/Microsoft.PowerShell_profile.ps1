@@ -21,6 +21,6 @@ if (Get-Command nvim -ErrorAction SilentlyContinue) {
   function n {
     nvim ./
   }
-  Write-Host "Function 'n' for 'nvim ./' created."
+  # Write-Host "Function 'n' for 'nvim ./' created."
 }
 
