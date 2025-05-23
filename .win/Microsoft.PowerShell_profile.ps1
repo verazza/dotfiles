@@ -16,3 +16,11 @@ if (Get-Command php-cs-fixer -ErrorAction SilentlyContinue) {
     $env:PHP_CS_FIXER_IGNORE_ENV = "1"
     # Write-Host "Environment variable 'PHP_CS_FIXER_IGNORE_ENV' set to 1 because php-cs-fixer was found."
 }
+
+if (Get-Command nvim -ErrorAction SilentlyContinue) {
+  function n {
+    nvim ./
+  }
+  Write-Host "Function 'n' for 'nvim ./' created."
+}
+

@@ -75,7 +75,7 @@ if command -v wl-copy &>/dev/null; then
   alias wl="wl-copy"
 fi
 if command -v nvim &>/dev/null; then
-  alias nv="nvim ./"
+  alias n="nvim ./"
 fi
 if command -v lazygit &>/dev/null; then
   alias lg="lazygit"
