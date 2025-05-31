@@ -35,4 +35,7 @@
 
 !.work/
 !.work/**/*
+
+!.hushlogin
+
 .work/logo/misaki_gothic_2nd.ttf
