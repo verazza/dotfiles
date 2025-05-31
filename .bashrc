@@ -82,10 +82,18 @@ if command -v lazygit &>/dev/null; then
 fi
 
 # wsl
-if [ -n "$WSL_DISTRO_NAME" ] && [ -f $HOME/.win/wsl/.bashrc ]; then
-  source $HOME/.win/wsl/.bashrc
+if [ -n "$WSL_DISTRO_NAME" ]; then
+  if [ "$WSL_DISTRO_NAME" = "Ubuntu" ]; then
+    if [ -f $HOME/.win/wsl/ubuntu/.bashrc ]; then
+      source $HOME/.win/wsl/ubuntu/.bashrc
+    fi
+  else
+    # あとで、devkitでの$WSL_DISTRO_NAMEの値がわかったら、elseif条件式を具体的なarchlinuxのディストロネームに変更する
+
+    source $HOME/.win/wsl/arch/.bashrc
+  fi
 else
-  # only cli using option
+  # only cli using option for me
   # i use kmscon when i work on CLI environment.
   if [ "$COLORTERM" = "kmscon" ]; then
     uim-fep
