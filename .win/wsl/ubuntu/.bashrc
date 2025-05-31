@@ -114,3 +114,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+if [ -d "/opt/nvim" ] && [ -f "/opt/nvim/nvim" ]; then
+  export PATH="$PATH:/opt/nvim"
+fi
