@@ -70,17 +70,6 @@ if [ -d "$HOME/.config/composer/vendor/bin" ]; then
   export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 fi
 
-# arias
-if command -v wl-copy &>/dev/null; then
-  alias wl="wl-copy"
-fi
-if command -v nvim &>/dev/null; then
-  alias n="nvim ./"
-fi
-if command -v lazygit &>/dev/null; then
-  alias lg="lazygit"
-fi
-
 # wsl
 if [ -n "$WSL_DISTRO_NAME" ]; then
   if [ "$WSL_DISTRO_NAME" = "Ubuntu" ]; then
@@ -98,6 +87,17 @@ else
   if [ "$COLORTERM" = "kmscon" ]; then
     uim-fep
   fi
+fi
+
+# arias
+if command -v wl-copy &>/dev/null; then
+  alias wl="wl-copy"
+fi
+if command -v nvim &>/dev/null; then
+  alias n="nvim ./"
+fi
+if command -v lazygit &>/dev/null; then
+  alias lg="lazygit"
 fi
 
 # read secret .bashrc
