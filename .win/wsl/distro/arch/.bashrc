@@ -18,8 +18,3 @@ if [ ! -L /run/user/1000/wayland-0 ]; then
     echo "Error: /mnt/wslg/runtime-dir not found."
   fi
 fi
-
-# もし、$HOME/.win/wsl/.bashrcが存在すれば、そこを読み込む
-if [ -f "$HOME/.win/wsl/.bashrc" ]; then
-  . "$HOME/.win/wsl/.bashrc"
-fi

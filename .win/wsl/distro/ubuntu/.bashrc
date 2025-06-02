@@ -114,8 +114,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# もし、$HOME/.win/wsl/.bashrcが存在すれば、そこを読み込む
-if [ -f "$HOME/.win/wsl/.bashrc" ]; then
-  . "$HOME/.win/wsl/.bashrc"
-fi
