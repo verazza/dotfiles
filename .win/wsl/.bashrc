@@ -8,8 +8,6 @@ if [ -d "/opt/nvim" ] && [ -f "/opt/nvim/nvim" ]; then
   export PATH="$PATH:/opt/nvim"
 fi
 
-cd
-
 if [ ! -f $HOME/.inputrc ]; then
   echo 'set bell-style none' >~/.inputrc
 fi
