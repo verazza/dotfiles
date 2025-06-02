@@ -68,7 +68,6 @@ nvim() {
       mkdir -p ~/.config/systemd/user
       if [ -n "$WSL_DISTRO_NAME" ]; then
         if [ "$WSL_DISTRO_NAME" = "Ubuntu" ]; then
-
           cp ~/.win/wsl/distro/ubuntu/services/user/discord.service ~/.config/systemd/user/
         else
           cp ~/.win/wsl/distro/arch/services/user/discord.service ~/.config/systemd/user/
@@ -139,9 +138,7 @@ nvim() {
     export_to_dynamic_bashrc
   fi
 
-  if pidof socat >/dev/null 2>&1; then
-    # echo "socat already running."
-  else
+  if ! pidof socat >/dev/null 2>&1; then
     if [ -S /tmp/discord-ipc-0 ]; then
       rm /tmp/discord-ipc-0
     fi
