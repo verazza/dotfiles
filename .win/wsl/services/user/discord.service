@@ -1,0 +1,13 @@
+[Unit]
+Description=Discord Client
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/discord
+Restart=on-failure
+Environment="DISPLAY=:0"
+Environment="XDG_RUNTIME_DIR=/run/user/%U"
+
+[Install]
+WantedBy=default.target

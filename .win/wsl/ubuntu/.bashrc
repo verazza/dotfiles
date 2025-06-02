@@ -115,8 +115,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -d "/opt/nvim" ] && [ -f "/opt/nvim/nvim" ]; then
-  export PATH="$PATH:/opt/nvim"
+# もし、$HOME/.win/wsl/.bashrcが存在すれば、そこを読み込む
+if [ -f "$HOME/.win/wsl/.bashrc" ]; then
+  . "$HOME/.win/wsl/.bashrc"
 fi
-
-cd

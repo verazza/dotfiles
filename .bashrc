@@ -60,6 +60,7 @@ if [ -d "$HOME/.sdkman" ] && [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# global
 if [ -d "$HOME/.global/bin" ]; then
   export PATH="$PATH:$HOME/.global/bin"
 fi
@@ -106,3 +107,8 @@ if [ -f $HOME/.secret/.bashrc ]; then
 fi
 
 export EDITOR=nvim
+
+# if there is a .dynamic_bashrc file, source it
+if [ -f "$HOME/.dynamic_bashrc" ]; then
+  source "$HOME/.dynamic_bashrc"
+fi

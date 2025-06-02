@@ -19,18 +19,7 @@ if [ ! -L /run/user/1000/wayland-0 ]; then
   fi
 fi
 
-if [ ! -f $HOME/.inputrc ]; then
-  echo 'set bell-style none' >~/.inputrc
+# もし、$HOME/.win/wsl/.bashrcが存在すれば、そこを読み込む
+if [ -f "$HOME/.win/wsl/.bashrc" ]; then
+  . "$HOME/.win/wsl/.bashrc"
 fi
-
-nvim() {
-  if pidof socat >/dev/null 2>&1; then
-    echo "socat already running."
-  else
-    if [ -S /tmp/discord-ipc-0 ]; then
-      rm /tmp/discord-ipc-0
-    fi
-    socat UNIX-LISTEN:/tmp/discord-ipc-0,fork EXEC:"npiperelay.exe //./pipe/discord-ipc-0" &
-  fi
-  command nvim "$@"
-}
