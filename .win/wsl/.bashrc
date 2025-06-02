@@ -140,7 +140,7 @@ nvim() {
   fi
 
   if pidof socat >/dev/null 2>&1; then
-    echo "socat already running."
+    # echo "socat already running."
   else
     if [ -S /tmp/discord-ipc-0 ]; then
       rm /tmp/discord-ipc-0
