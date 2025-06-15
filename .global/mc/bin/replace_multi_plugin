@@ -28,18 +28,18 @@ declare -A JAR_FILES=(
 
   # velocity
   # 要確認: Geyser, FloodGate
-  ["floodgate-velocity.jar"]="floodgate-velocity.jar" # 1
-  ["Geyser-Velocity.jar"]="Geyser-Velocity.jar"       # 1
+  # ["floodgate-velocity.jar"]="floodgate-velocity.jar" # 1
+  # ["Geyser-Velocity.jar"]="Geyser-Velocity.jar"       # 1
 
-  ["LuckPerms-Velocity-5.4.164.jar"]="" # 1
-  ["spark-1.10.136-velocity.jar"]=""    # 1
+  # ["LuckPerms-Velocity-5.4.164.jar"]="" # 1
+  # ["spark-1.10.136-velocity.jar"]=""    # 1
 
   # ["UltimateAntibot-velocity-4.1.2-ABYSS.jar"]=""
   # ["minimotd-velocity-2.1.6.jar"]=""
   # ["ViaVersion-5.3.2.jar"]=""
   # ["ViaRewind-4.0.7.jar"]="" # 1
   # ["ViaBackwards-5.3.2.jar"]=""
-  # ["Velocittab-1.7.5.jar"]="" # 1
+  ["Velocitab-1.7.6.jar"]="" # 1
 )
 
 find "$TARGET_DIR" -type d -name "plugins" | while read PLUGINS_DIR; do
